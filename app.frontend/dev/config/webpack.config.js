@@ -15,7 +15,7 @@ module.exports = {
 	],
 	devtool: process.env.WEBPACK_DEVTOOL || 'source-map',
 	output: {
-		path: path.join(__dirname, 'build'),
+		path: path.join(__dirname, '../prod/resources'),
 		filename: 'bundle.js'
 	},
 	resolve: {
@@ -25,7 +25,7 @@ module.exports = {
 		loaders
 	},
 	devServer: {
-		contentBase: "./public",
+		contentBase: '../prod/resources',
 			noInfo: true, //  --no-info option
 			hot: true,
 			inline: true,

@@ -5,7 +5,7 @@
   "main": "''",
   "scripts": {
     "build": "webpack -p --config config/webpack.production.config.js --progress --profile --colors",
-    "dev": "webpack-dev-server --progress --profile --colors"
+    "dev": "webpack-dev-server --config config/webpack.config.js --progress --profile --colors"
   },
   "repository": {
     "type": "git",
