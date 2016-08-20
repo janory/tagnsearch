@@ -21,9 +21,16 @@ public class UserService {
     @Autowired
     private SequenceService userSequenceService;
 
-    public User createOrUpdateUser(User user) {
+    public User create(User user) {
+        if ( user.getId() != null ) {
+            throw new IllegalArgumentException("ID must be always null here!");
+        }
+        return userRepository.save(user);
+    }
+
+    public User update(User user) {
         if ( user.getId() == null ) {
-            user.setId(userSequenceService.getNextSequence(User.class));
+            throw new IllegalArgumentException("ID must be always set here!");
         }
         return userRepository.save(user);
     }

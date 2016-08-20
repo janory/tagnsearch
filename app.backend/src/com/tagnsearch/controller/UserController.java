@@ -25,14 +25,14 @@ public class UserController {
         return userService.findById(id);
     }
 
-
     @RequestMapping(method = RequestMethod.PUT)
     public User createUser(@RequestBody User user){
-        final User newUser = new User();
-        newUser.setLastName(user.getLastName());
-        newUser.setFirstName(user.getFirstName());
-        newUser.setPassword(user.getPassword());
-        return userService.createOrUpdateUser(newUser);
+        return userService.create(user);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public User updateUser(@RequestBody User user){
+        return userService.update(user);
     }
 
 }
