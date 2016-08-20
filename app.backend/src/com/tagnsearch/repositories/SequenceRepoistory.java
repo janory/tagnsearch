@@ -1,14 +1,13 @@
 package com.tagnsearch.repositories;
 
-
-import com.tagnsearch.entities.User;
+import com.tagnsearch.entities.Sequence;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by JS on 8/19/16.
+ * Created by JS on 8/20/16.
  */
 
 @Repository
-public interface UserRepository extends ElasticsearchRepository<User, Long> {
+public interface SequenceRepoistory extends ElasticsearchRepository<Sequence, String> {
 }
