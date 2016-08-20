@@ -23,7 +23,8 @@ sourceSets {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-web:1.4.0.RELEASE")
+    compile("org.springframework.data:spring-data-elasticsearch:2.0.2.RELEASE")
 }
 
 repositories {
