@@ -28,7 +28,11 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public User createUser(@RequestBody User user){
-        return userService.createOrUpdateUser(user);
+        final User newUser = new User();
+        newUser.setLastName(user.getLastName());
+        newUser.setFirstName(user.getFirstName());
+        newUser.setPassword(user.getPassword());
+        return userService.createOrUpdateUser(newUser);
     }
 
 }
