@@ -19,7 +19,7 @@ public class SequenceService {
 
     // TODO make this thread safe
     public long getNextSequence(final Class<?> requiredType) {
-        if ( !checlIfElasticDocument(requiredType) ) {
+        if ( !checkIfElasticDocument(requiredType) ) {
             throw new IllegalArgumentException(requiredType.getName() + " class is not an Elastic Document");
         }
         final String sequenceName = requiredType.getSimpleName().toLowerCase();
@@ -32,7 +32,7 @@ public class SequenceService {
         return sequenceRepoistory.save(sequence).getValue();
     }
 
-    private boolean checlIfElasticDocument(final Class<?> requiredType) {
+    private boolean checkIfElasticDocument(final Class<?> requiredType) {
         final Annotation[] declaredAnnotations = requiredType.getDeclaredAnnotations();
         for (Annotation eachAnnotation : declaredAnnotations) {
             if ("Document".equals(eachAnnotation.annotationType().getSimpleName()) ) {

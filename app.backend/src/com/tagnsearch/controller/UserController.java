@@ -1,13 +1,12 @@
 package com.tagnsearch.controller;
 
 import com.tagnsearch.entities.User;
-import com.tagnsearch.repositories.UserRepository;
 import com.tagnsearch.services.UserService;
+import com.tagnsearch.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Created by JS on 8/19/16.
@@ -20,19 +19,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
-    public User getUserDetails(@PathVariable Long id) {
-        return userService.findById(id);
+    @RequestMapping(value = "/{username}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity getUserDetails(@PathVariable String username) {
+        final User user = userService.findByUsername(username);
+        if (UserUtils.checkIfUserExists(user)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(username + " user not found!");
+        }
+        return ResponseEntity.ok(user);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public User createUser(@RequestBody User user){
-        return userService.create(user);
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public User updateUser(@RequestBody User user){
-        return userService.update(user);
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public User updateUser(@RequestBody User userDTO){
+        return userService.update(userDTO);
     }
 
 }
