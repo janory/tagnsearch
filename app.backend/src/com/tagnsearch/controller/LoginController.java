@@ -2,7 +2,7 @@ package com.tagnsearch.controller;
 
 import com.tagnsearch.entities.User;
 import com.tagnsearch.services.UserService;
-import com.tagnsearch.utils.PasswordUtils;
+import com.tagnsearch.utils.AuthUtils;
 import com.tagnsearch.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +39,7 @@ public class LoginController {
                     .status(HttpStatus.UNAUTHORIZED)
                     .body("Username or password is wrong!");
         }
-        return ResponseEntity.ok(PasswordUtils.generateToken(user));
+        return ResponseEntity.ok(AuthUtils.generateToken(user));
     }
 
     private static class UserDTO {

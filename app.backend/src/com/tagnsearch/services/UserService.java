@@ -2,7 +2,7 @@ package com.tagnsearch.services;
 
 import com.tagnsearch.entities.User;
 import com.tagnsearch.repositories.UserRepository;
-import com.tagnsearch.utils.PasswordUtils;
+import com.tagnsearch.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class UserService {
         if ( !checkIfUsernameAlreadyExist(user) ) {
             throw new IllegalArgumentException("Username must be unique");
         }
-        user.setPassword(PasswordUtils.encryptPassword(user.getPassword()));
+        user.setPassword(AuthUtils.encryptPassword(user.getPassword()));
         user.setId(sequenceService.getNextSequence(User.class));
         return userRepository.save(user);
     }

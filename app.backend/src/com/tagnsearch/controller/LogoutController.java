@@ -1,6 +1,6 @@
 package com.tagnsearch.controller;
 
-import com.tagnsearch.utils.PasswordUtils;
+import com.tagnsearch.utils.AuthUtils;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +17,6 @@ public class LogoutController {
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public void logoutUser(@RequestHeader("Authorization") String authHeader) {
         final String token = authHeader.substring(7);
-        PasswordUtils.removeToken(token);
+        AuthUtils.removeToken(token);
     }
 }
