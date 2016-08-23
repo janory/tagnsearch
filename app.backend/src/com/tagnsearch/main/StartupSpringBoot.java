@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.plugin.core.config.EnablePluginRegistries;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.net.InetSocketAddress;
 
@@ -21,6 +23,7 @@ import java.net.InetSocketAddress;
 @ComponentScan(basePackages = "com.tagnsearch")
 @EnableElasticsearchRepositories(basePackages = "com.tagnsearch.repositories")
 @EnableAutoConfiguration
+@EnableSwagger2
 public class StartupSpringBoot {
 
     public static void main(String[] args) throws Exception {
