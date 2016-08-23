@@ -1,6 +1,7 @@
 package com.tagnsearch.auth;
 
-import com.tagnsearch.utils.PasswordUtils;
+import com.tagnsearch.utils.AuthUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -32,16 +33,16 @@ public class AuthorizationFilter extends GenericFilterBean  {
         if ( request.getRequestURI().equals(LOGIN_URL) || request.getRequestURI().equals(REGISTRATION_URL)) {
             chain.doFilter(req, res);
         } else if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            response.sendRedirect(LOGIN_URL);
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
         } else {
             final String token = authHeader.substring(7); // The part after "Bearer "
 
-            if ( !PasswordUtils.isTokenActicve(token) ) {
-                response.sendRedirect(LOGIN_URL);
+            if ( !AuthUtils.isTokenActicve(token) ) {
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
             }
 
             try {
-                request.setAttribute("claims", PasswordUtils.getClaims(token));
+                request.setAttribute("claims", AuthUtils.getClaims(token));
             } catch (final Exception e) {
                 throw new ServletException("Invalid token!");
             }
