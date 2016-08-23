@@ -24,7 +24,7 @@ public class SequenceService {
             throw new IllegalArgumentException(requiredType.getName() + " class is not an Elastic Document");
         }
         final String sequenceName = requiredType.getSimpleName().toLowerCase();
-        lockSequence(sequenceName);
+//        lockSequence(sequenceName);
         try {
             final Sequence sequence = sequenceRepoistory.findOne(sequenceName);
             if (sequence == null) {
@@ -34,7 +34,7 @@ public class SequenceService {
             sequence.setValue(prevValue + 1);
             return sequenceRepoistory.save(sequence).getValue();
         } finally {
-            unlockSequence(sequenceName);
+//            unlockSequence(sequenceName);
         }
     }
 
