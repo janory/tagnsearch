@@ -12,6 +12,6 @@ public class UserUtils {
     }
 
     public static boolean checkIfPasswordCorrect(final User user, final String password) {
-        return PasswordUtils.encryptPassword(password).equals(user.getPassword());
+        return password.equals(user.getPassword());
     }
 }
