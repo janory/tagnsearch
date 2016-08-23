@@ -39,6 +39,7 @@ public class AuthorizationFilter extends GenericFilterBean  {
 
             if ( !AuthUtils.isTokenActicve(token) ) {
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                return;
             }
 
             try {
