@@ -1,48 +1,49 @@
 package com.tagnsearch.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by JS on 8/22/16.
  */
 
-// TODO make these things sync when we are working on the stack, but not the whole methods, but by object
 public final class LockingUtil {
 
-    private static final Map<String, Stack<Object>> LOCKED_OBJECTS = new HashMap<>();
+    private static final Map<String, Queue<Object>> LOCKED_OBJECTS = new HashMap<>();
 
     public static void lock(final Object id, final Class type) {
         checkIfIdOrClassNull(id, type);
-        Stack<Object> threads = LOCKED_OBJECTS.get(createUniqueId(id, type));
-        if ( threads == null ) {
-            threads = new Stack<Object>();
+        Queue<Object> threads = LOCKED_OBJECTS.get(createUniqueId(id, type));
+        if (threads == null) {
+            threads = new LinkedList<Object>();
             LOCKED_OBJECTS.put(createUniqueId(id, type), threads);
         }
-        if ( !threads.isEmpty() ) {
-            try {
-                final Object lockedThread = new Object();
-                threads.push(lockedThread);
-                synchronized (lockedThread) {
-                    lockedThread.wait();
+        synchronized (threads) {
+            if (!threads.isEmpty()) {
+                try {
+                    final Object lockedThread = new Object();
+                    threads.add(lockedThread);
+                    synchronized (lockedThread) {
+                        lockedThread.wait();
+                    }
+                } catch (InterruptedException e) {
+                    throw new InternalError(e);
                 }
-            } catch (InterruptedException e) {
-                throw new InternalError(e);
+            } else {
+                threads.add(new Object());
             }
-        } else {
-            threads.push(new Object());
         }
     }
 
     public static void unlock(final Object id, final Class type) {
         checkIfIdOrClassNull(id, type);
-        Stack<Object> threads = LOCKED_OBJECTS.get(createUniqueId(id, type));
-        threads.remove(threads.firstElement());
-        if ( !threads.isEmpty() ) {
-            final Object threadToRelease = threads.firstElement();
-            synchronized (threadToRelease) {
-                threadToRelease.notifyAll();
+        Queue<Object> threads = LOCKED_OBJECTS.get(createUniqueId(id, type));
+        synchronized (threads) {
+            threads.poll();
+            if (!threads.isEmpty()) {
+                final Object threadToRelease = threads.peek();
+                synchronized (threadToRelease) {
+                    threadToRelease.notifyAll();
+                }
             }
         }
     }
