@@ -5,7 +5,7 @@ import com.tagnsearch.entities.User;
 /**
  * Created by JS on 8/21/16.
  */
-public class UserUtils {
+public final class UserUtils {
 
     public static boolean checkIfUserExists(final User user) {
         return user == null;
@@ -13,5 +13,9 @@ public class UserUtils {
 
     public static boolean checkIfPasswordCorrect(final User user, final String password) {
         return password.equals(user.getPassword());
+    }
+
+    public UserUtils() {
+        throw new AssertionError();
     }
 }

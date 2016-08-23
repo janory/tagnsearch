@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * Created by JS on 8/21/16.
  */
-public class AuthUtils {
+public final class AuthUtils {
 
     private static final String ENCRYPTION_TYPE_MD5 = "MD5";
     private static final String SECRETKEY = new BigInteger(130, new SecureRandom()).toString(32);
@@ -63,5 +63,9 @@ public class AuthUtils {
                 .setSigningKey(SECRETKEY)
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    private AuthUtils(){
+        throw new AssertionError();
     }
 }
