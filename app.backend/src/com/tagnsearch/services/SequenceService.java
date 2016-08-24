@@ -1,12 +1,12 @@
 package com.tagnsearch.services;
 
 import com.tagnsearch.entities.Sequence;
-import com.tagnsearch.repositories.SequenceRepoistory;
-import com.tagnsearch.utils.LockingUtil;
+import com.tagnsearch.repositories.SequenceRepositoryExt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.annotation.Annotation;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by JS on 8/20/16.
@@ -16,7 +16,9 @@ import java.lang.annotation.Annotation;
 public class SequenceService {
 
     @Autowired
-    private SequenceRepoistory sequenceRepoistory;
+    private SequenceRepositoryExt sequenceRepoistory;
+
+    private final ReentrantLock lock = new ReentrantLock();
 
     // TODO make this thread safe
     public long getNextSequence(final Class<?> requiredType) {
@@ -24,9 +26,8 @@ public class SequenceService {
             throw new IllegalArgumentException(requiredType.getName() + " class is not an Elastic Document");
         }
         final String sequenceName = requiredType.getSimpleName().toLowerCase();
-//        lockSequence(sequenceName);
+        final Sequence sequence = sequenceRepoistory.lockById(sequenceName);
         try {
-            final Sequence sequence = sequenceRepoistory.findOne(sequenceName);
             if (sequence == null) {
                 return createNewSequence(sequenceName);
             }
@@ -34,16 +35,8 @@ public class SequenceService {
             sequence.setValue(prevValue + 1);
             return sequenceRepoistory.save(sequence).getValue();
         } finally {
-//            unlockSequence(sequenceName);
+            sequenceRepoistory.unlockById(sequenceName);
         }
-    }
-
-    private void unlockSequence(final String sequenceName) {
-        LockingUtil.unlock(sequenceName, Sequence.class);
-    }
-
-    private void lockSequence(final String sequenceName) {
-        LockingUtil.lock(sequenceName, Sequence.class);
     }
 
     private boolean checkIfElasticDocument(final Class<?> requiredType) {

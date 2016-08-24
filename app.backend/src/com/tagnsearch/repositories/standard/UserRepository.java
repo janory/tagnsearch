@@ -1,4 +1,4 @@
-package com.tagnsearch.repositories;
+package com.tagnsearch.repositories.standard;
 
 
 import com.tagnsearch.entities.User;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
  * Created by JS on 8/19/16.
  */
 
-@Repository
 public interface UserRepository extends ElasticsearchRepository<User, Long> {
     User findByUsername(String username);
 }

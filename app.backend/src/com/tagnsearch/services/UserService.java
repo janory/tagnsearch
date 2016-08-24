@@ -1,7 +1,7 @@
 package com.tagnsearch.services;
 
 import com.tagnsearch.entities.User;
-import com.tagnsearch.repositories.UserRepository;
+import com.tagnsearch.repositories.standard.UserRepository;
 import com.tagnsearch.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
