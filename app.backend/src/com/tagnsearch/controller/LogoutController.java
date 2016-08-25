@@ -1,10 +1,9 @@
 package com.tagnsearch.controller;
 
+import com.tagnsearch.entities.User;
 import com.tagnsearch.utils.AuthUtils;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import io.jsonwebtoken.Claims;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by JS on 8/21/16.
@@ -15,8 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogoutController {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public void logoutUser(@RequestHeader("Authorization") String authHeader) {
-        final String token = authHeader.substring(7);
-        AuthUtils.removeToken(token);
+    public void logoutUser(@RequestHeader("Authorization") String authHeader,
+                           @RequestAttribute("claims") Claims claims){
+        final String username = (String) claims.get("sub");
+        User user = new User();
+        user.setUsername(username);
+        AuthUtils.removeToken(user);
     }
 }

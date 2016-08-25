@@ -9,9 +9,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by JS on 8/21/16.
@@ -20,7 +18,7 @@ public final class AuthUtils {
 
     private static final String ENCRYPTION_TYPE_MD5 = "MD5";
     private static final String SECRETKEY = new BigInteger(130, new SecureRandom()).toString(32);
-    private static final Set<String> TOKENS = new HashSet<>();
+    private static final Map<String, String> USERTOKENS = new HashMap<>();
 
 
     public static String encryptPassword(final String password) {
@@ -38,23 +36,31 @@ public final class AuthUtils {
         }
     }
 
-    public static void addToken(String token) {
-        TOKENS.add(token);
+    public static void addToken(final User user, final String token) {
+        USERTOKENS.put(user.getUsername(), token);
     }
 
-    public static void removeToken(String token) {
-        TOKENS.remove(token);
+    public static void removeToken(final User user) {
+        USERTOKENS.remove(user.getUsername());
     }
 
-    public static boolean isTokenActicve(String token) {
-        return TOKENS.contains(token);
+    public static boolean isTokenActicve(final String token) {
+        return USERTOKENS.containsValue(token);
+    }
+
+    public static boolean hasActiveToken(final User user) {
+        return USERTOKENS.containsKey(user.getUsername());
+    }
+
+    public static String getTokenByUser(final User user) {
+        return USERTOKENS.get(user.getUsername());
     }
 
     public static String generateToken(final User user) {
         final String token = Jwts.builder().setSubject(user.getUsername())
                 .claim("roles", user.getRole()).setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, SECRETKEY).compact();
-        addToken(token);
+        addToken(user, token);
         return token;
     }
 
@@ -68,4 +74,6 @@ public final class AuthUtils {
     private AuthUtils(){
         throw new AssertionError();
     }
+
+
 }

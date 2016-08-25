@@ -39,7 +39,12 @@ public class LoginController {
                     .status(HttpStatus.UNAUTHORIZED)
                     .body("Username or password is wrong!");
         }
-        return ResponseEntity.ok(AuthUtils.generateToken(user));
+        return ResponseEntity.ok(findOrCreateToken(user));
+    }
+
+    private String findOrCreateToken(final User user) {
+        return AuthUtils.hasActiveToken(user) ?
+                AuthUtils.getTokenByUser(user) : AuthUtils.generateToken(user);
     }
 
     private static class UserDTO {
