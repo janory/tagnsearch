@@ -1,6 +1,6 @@
 {
-  "name": "react-webpack-babel",
-  "version": "0.0.3",
+  "name": "tagnsearch",
+  "version": "0.0.1",
   "description": "tagnsearch App",
   "main": "''",
   "scripts": {
@@ -8,16 +8,24 @@
     "start": "webpack-dev-server --progress --profile --colors",
     "lint": "eslint --ext js --ext jsx src || exit 0"
   },
+  "repository": {
+    "type": "git",
+    "url": "http://10.8.0.1:3000/js/tagnsearch"
+  },
+  "license": "?",
   "author": "Janos Szathmary",
   "dependencies": {
     "axios": "^0.13.1",
-    "react": "15.3.0",
-    "react-dom": "15.3.0",
+    "md5": "^2.1.0",
+    "react": "15.3.1",
+    "react-addons-shallow-compare": "^15.3.1",
+    "react-dom": "15.3.1",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-promise-middleware": "^4.0.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "semantic-react": "^0.8.4"
   },
   "devDependencies": {
     "babel-loader": "6.2.4",
