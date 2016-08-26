@@ -14,12 +14,18 @@ const store = createStore(reducer,
 	} 
 });
 
-const showNewValues = (newState) => {
-	console.log(newState)
-};
-
-store.subscribe( () => {
-	showNewValues(store.getState());
+// way 1
+/*
+store.subscribe(function(){
+	console.log(store.getState());
 })
+*/
+
+// way 2
+//store.subscribe( () => { console.log(store.getState()); })
+
+// way 3
+store.subscribe( () => console.log(store.getState()) )
+
 
 store.dispatch({type: "CHANGE_NAME", payload: "Janek"});
