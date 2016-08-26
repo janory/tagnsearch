@@ -6,9 +6,11 @@ import { Container } from 'semantic-react';
 export default class Layout extends Component {
 	render() {
 		return (
-			<Header/>
-			<Container>{this.props.children}</Container>
-			<Footer/>
+			<div>
+				<Header/>
+				<Container>{this.props.children}</Container>
+				<Footer/>
+			</div>
 		);
 	}
 }
