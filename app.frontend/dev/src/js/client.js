@@ -1,19 +1,25 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory } from "react-router";
+import { createStore } from "redux";
 
-import Layout from './views/Layout';
-import Login from './views/Login';
-import Welcome from './views/Welcome';
+const reducer = (state, action) => {
+	if ( action.type === "CHANGE_NAME" ) {
+		return state.user.username = action.payload;
+	}
+	return state;
+};
 
+const store = createStore(reducer, 
+	 { user: {
+		username: "",
+		password: ""
+	} 
+});
 
-const app = document.getElementById('app');
+const showNewValues = (newState) => {
+	console.log(newState)
+};
 
-ReactDOM.render(
-  <Router history={hashHistory}>
-    <Route path="/" component={Layout}>
-      <IndexRoute component={Login}></IndexRoute>
-      <Route path="/welcome/:username/:token" component={Welcome} />
-    </Route>
-  </Router>,
-app);
+store.subscribe( () => {
+	showNewValues(store.getState());
+})
+
+store.dispatch({type: "CHANGE_NAME", payload: "Janek"});
