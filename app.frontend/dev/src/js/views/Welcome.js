@@ -11,24 +11,12 @@ export default class Welcome extends Component {
 	}
 
 	componentWillMount() {
-		const config = {
-		  headers: {'Authorization': 'Bearer ' + this.props.params.token}
-		};
-		axios.get('/users/' + this.props.params.username, config)
-		.then((response) => {
-			this.setState({
-				username: response.data.username,
-				password: response.data.password
-			});
-		})
-		.catch((error) => {
-			console.log(error);
-		});
 	}
 
 	render() {
 		return (
 			<div>
+				ASDF
 				<div>{this.state.username}</div>
 				<div>{this.state.password}</div>
 			</div>

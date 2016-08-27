@@ -23,8 +23,10 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
     "redux": "^3.5.2",
+    "redux-auth-wrapper": "^0.7.0",
     "redux-logger": "^2.6.1",
     "redux-promise-middleware": "^4.0.0",
+    "redux-router": "^2.1.2",
     "redux-thunk": "^2.1.0",
     "semantic-react": "^0.8.4"
   },
