@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import store from "./store"
 import routes from "./routes"
-import {Provider} from 'react-redux';
-import {ReduxRouter, Router, hashHistory} from 'redux-router';
-//import {Router, hashHistory} from 'react-router';
+import { Provider } from "react-redux";
+import { ReduxRouter } from "redux-router";
 
-
-const app = document.getElementById('app');
+const app = document.getElementById("app");
 
 ReactDOM.render(
-	<Provider store={store}>
+    <Provider store={store}>
 		<ReduxRouter>{routes}</ReduxRouter>
 	</Provider>
-,app);
+, app);

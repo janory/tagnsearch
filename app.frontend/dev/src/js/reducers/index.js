@@ -1,8 +1,8 @@
 import { combineReducers } from "redux"
-import {routerStateReducer} from "redux-router";
-import auth from "./authReducer"
+import { routerStateReducer } from "redux-router";
+import user from "./userReducer"
 
 export default combineReducers({
-  auth,
-  router: routerStateReducer
+    user,
+    router: routerStateReducer
 })

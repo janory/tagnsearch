@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Column, Form, Field, Input, Button, Grid } from "semantic-react";
-import { loginUser } from "../actions/authActions"
+import { loginUser } from "../actions/userActions"
 import { connect } from "react-redux"
 import { Link } from "react-router"
 

@@ -1,15 +1,13 @@
-import React from 'react';
-import {Route, IndexRedirect} from 'react-router';
+import React from "react";
+import { Route, IndexRedirect } from "react-router";
+import App from "../containers/App";
+import { LoginView, WelcomeView } from "../views";
+import { requireAuthentication } from "../utils";
 
-import Layout from '../views/Layout';
-import Login from '../views/Login';
-import Welcome from '../views/Welcome';
-import { requireAuthentication } from '../utils';
-
-export default(
-	<Route path="/" component={Layout}>
+export default (
+    <Route path="/" component={App}>
   		<IndexRedirect to="/login" />
-		<Route path="/login" component={Login}></Route>
-		<Route path="/welcome" component={requireAuthentication(Welcome)} />
+		<Route path="/login" component={LoginView}></Route>
+		<Route path="/welcome" component={requireAuthentication(WelcomeView)} />
 	</Route>
 );
