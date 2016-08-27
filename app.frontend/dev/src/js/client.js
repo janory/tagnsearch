@@ -9,6 +9,6 @@ const app = document.getElementById("app");
 
 ReactDOM.render(
     <Provider store={store}>
-		<ReduxRouter>{routes}</ReduxRouter>
-	</Provider>
+        <ReduxRouter>{routes}</ReduxRouter>
+    </Provider>
 , app);

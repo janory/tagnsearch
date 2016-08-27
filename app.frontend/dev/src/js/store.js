@@ -14,9 +14,9 @@ const store = compose(
         createHistory
     }),
     applyMiddleware(
-    	logger(), 
-    	promise(), 
-    	thunk)
+        logger(), 
+        promise(), 
+        thunk)
 )(createStore)(reducer);
 
 export default store;

@@ -6,8 +6,8 @@ import { requireAuthentication } from "../utils";
 
 export default (
     <Route path="/" component={App}>
-  		<IndexRedirect to="/login" />
-		<Route path="/login" component={LoginView}></Route>
-		<Route path="/welcome" component={requireAuthentication(WelcomeView)} />
-	</Route>
+        <IndexRedirect to="/login" />
+        <Route path="/login" component={LoginView}></Route>
+        <Route path="/welcome" component={requireAuthentication(WelcomeView)} />
+    </Route>
 );

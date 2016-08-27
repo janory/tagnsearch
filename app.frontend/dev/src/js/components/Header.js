@@ -5,11 +5,11 @@ export default class Header extends Component {
     render() {
         return (
             <Container>
-				<Menu>
-				    <MenuItem>First item</MenuItem>
-				    <MenuItem>Second Item</MenuItem>
-				</Menu>
-			</Container>
+                <Menu>
+                    <MenuItem>First item</MenuItem>
+                    <MenuItem>Second Item</MenuItem>
+                </Menu>
+            </Container>
         );
     }
 }

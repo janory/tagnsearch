@@ -31,30 +31,30 @@ export default class Login extends Component {
 
     render() {
         const containerStyle = {
-            marginTop: "100px"
+            marginTop: "150px"
         };
         return (
             <Grid centered style={containerStyle}>
-				<Row>
-					<Column width="5">
-						<Form>
-							<Field inline>
-								<Input onChange={this.changeUsername.bind(this)} icon="users" label="Username" type="text" fluid/>
-							</Field>
-							<Field inline>
-								<Input onChange={this.changePassowrd.bind(this)} icon="asterisk" label="Password" type="password" fluid/>
-							</Field>
-							<Button onClick={this.login.bind(this)} animated={"fade"}  color={"teal"} fluid>
-								<div class="visible content">Loign</div>
-								<div class="hidden content">
-								<i class="right arrow icon"></i>
-								</div>
-							</Button>
-							<Link to="welcome" >Welcome</Link>
-						</Form>	
-					</Column>
-				</Row>
-			</Grid>
+                <Row>
+                    <Column width="5">
+                        <Form>
+                            <Field inline>
+                                <Input onChange={this.changeUsername.bind(this)} icon="users" label="Username" type="text" fluid/>
+                            </Field>
+                            <Field inline>
+                                <Input onChange={this.changePassowrd.bind(this)} icon="asterisk" label="Password" type="password" fluid/>
+                            </Field>
+                            <Button onClick={this.login.bind(this)} animated={"fade"}  color={"teal"} fluid>
+                                <div class="visible content">Loign</div>
+                                <div class="hidden content">
+                                <i class="right arrow icon"></i>
+                                </div>
+                            </Button>
+                            <Link to="welcome" >Welcome</Link>
+                        </Form> 
+                    </Column>
+                </Row>
+            </Grid>
         );
     }
 }
