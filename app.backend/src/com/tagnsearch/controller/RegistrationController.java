@@ -18,7 +18,7 @@ import javax.validation.constraints.Null;
  */
 
 @RestController
-@RequestMapping("/registration")
+@RequestMapping("/api/registration")
 public class RegistrationController {
 
     @Autowired

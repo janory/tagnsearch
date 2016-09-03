@@ -19,8 +19,8 @@ import java.io.IOException;
 // use constants and less if
 public class AuthorizationFilter extends GenericFilterBean  {
 
-    private static final String LOGIN_URL = "/login";
-    private static final String REGISTRATION_URL = "/registration";
+    private static final String LOGIN_URL = "/api/login";
+    private static final String REGISTRATION_URL = "/api/registration";
 
     @Override
     public void doFilter(final ServletRequest req,
@@ -29,25 +29,30 @@ public class AuthorizationFilter extends GenericFilterBean  {
         final HttpServletRequest request = (HttpServletRequest) req;
         final HttpServletResponse response = (HttpServletResponse) res;
 
-        final String authHeader = request.getHeader("Authorization");
-        if ( request.getRequestURI().equals(LOGIN_URL) || request.getRequestURI().equals(REGISTRATION_URL)) {
+        final String requestURI = request.getRequestURI();
+        if ( !requestURI.contains("/api/") ) {
             chain.doFilter(req, res);
-        } else if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
         } else {
-            final String token = authHeader.substring(7); // The part after "Bearer "
-
-            if ( !AuthUtils.isTokenActicve(token) ) {
+            final String authHeader = request.getHeader("Authorization");
+            if (request.getRequestURI().equals(LOGIN_URL) || request.getRequestURI().equals(REGISTRATION_URL)) {
+                chain.doFilter(req, res);
+            } else if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                return;
-            }
+            } else {
+                final String token = authHeader.substring(7); // The part after "Bearer "
 
-            try {
-                request.setAttribute("claims", AuthUtils.getClaims(token));
-            } catch (final Exception e) {
-                throw new ServletException("Invalid token!");
+                if (!AuthUtils.isTokenActicve(token)) {
+                    response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                    return;
+                }
+
+                try {
+                    request.setAttribute("claims", AuthUtils.getClaims(token));
+                } catch (final Exception e) {
+                    throw new ServletException("Invalid token!");
+                }
+                chain.doFilter(req, res);
             }
-            chain.doFilter(req, res);
         }
     }
 

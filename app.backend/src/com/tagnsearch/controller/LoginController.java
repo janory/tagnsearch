@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/api/login")
 public class LoginController {
 
     @Autowired

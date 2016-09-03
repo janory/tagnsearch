@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-@RequestMapping("/logout")
+@RequestMapping("/api/logout")
 public class LogoutController {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
