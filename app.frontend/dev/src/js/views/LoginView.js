@@ -6,11 +6,14 @@ import { Link } from "react-router"
 
 @connect()
 export default class Login extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        console.log(this.props);
+        const redirectRoute = this.props.location.query.redirect || "/welcome";
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            redirectRoute: redirectRoute
         };
     }
 
@@ -25,7 +28,7 @@ export default class Login extends Component {
     login(e) {
         e.preventDefault();
         if (this.state.username !== "" && this.state.password !== "") {
-            this.props.dispatch(loginUser(this.state.username, this.state.password));
+            this.props.dispatch(loginUser(this.state.username, this.state.password, this.state.redirectRoute));
         }
     }
 
@@ -50,7 +53,6 @@ export default class Login extends Component {
                                 <i class="right arrow icon"></i>
                                 </div>
                             </Button>
-                            <Link to="welcome" >Welcome</Link>
                         </Form> 
                     </Column>
                 </Row>
