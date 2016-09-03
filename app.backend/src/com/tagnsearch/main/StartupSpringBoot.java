@@ -69,6 +69,12 @@ public class StartupSpringBoot extends WebMvcConfigurerAdapter {
                     @Override
                     protected Resource getResource(String resourcePath,
                                                    Resource location) throws IOException {
+
+                        if ( resourcePath.endsWith(".js") ) {
+                            final URL url = location.getURL();
+                            return new ClassPathResource("/resources/" + resourcePath, ClassUtils.getDefaultClassLoader());
+                        }
+
                         return location.exists() && location.isReadable() ? location
                                 : null;
                     }
