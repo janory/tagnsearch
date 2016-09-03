@@ -55,13 +55,8 @@ public class StartupSpringBoot extends WebMvcConfigurerAdapter {
         return client;
     }
 
-    @Autowired
-    private ResourceProperties resourceProperties = new ResourceProperties();
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        Integer cachePeriod = resourceProperties.getCachePeriod();
-
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/resources/index.html")
                 .resourceChain(true)
