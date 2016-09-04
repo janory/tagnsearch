@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Container, Row, Column, Form, Field, Input, Button, Grid } from "semantic-react";
+import { Row, Column, Form, Field, Input, Button, Grid } from "semantic-react";
 import { loginUser } from "../actions/userActions"
 import { connect } from "react-redux"
-import { Link } from "react-router"
 
 @connect()
 export default class Login extends Component {
@@ -18,11 +17,15 @@ export default class Login extends Component {
     }
 
     changeUsername(e) {
-        this.state.username = e.target.value;
+        this.setState({
+            username: e.target.value
+        });
     }
 
     changePassowrd(e) {
-        this.state.password = e.target.value;
+        this.setState({
+            password: e.target.value
+        });
     }
 
     login(e) {
