@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Row, Column, Form, Field, Input, Button, Grid } from "semantic-react";
+import { Row, Column, Form, Field, Input, Button, Grid, } from "semantic-react";
 import { loginUser } from "../actions/userActions"
 import { connect } from "react-redux"
+import { Link } from "react-router"
 
 @connect()
 export default class Login extends Component {
@@ -16,20 +17,15 @@ export default class Login extends Component {
         };
     }
 
-    changeUsername(e) {
+    changeInput(fieldName, event) {
+        console.log(fieldName);
         this.setState({
-            username: e.target.value
+            [fieldName]: event.target.value
         });
     }
 
-    changePassowrd(e) {
-        this.setState({
-            password: e.target.value
-        });
-    }
-
-    login(e) {
-        e.preventDefault();
+    login(event) {
+        event.preventDefault();
         if (this.state.username !== "" && this.state.password !== "") {
             this.props.dispatch(loginUser(this.state.username, this.state.password, this.state.redirectRoute));
         }
@@ -37,7 +33,7 @@ export default class Login extends Component {
 
     render() {
         const containerStyle = {
-            marginTop: "150px"
+            marginTop: "250px"
         };
         return (
             <Grid centered style={containerStyle}>
@@ -45,18 +41,20 @@ export default class Login extends Component {
                     <Column width="5">
                         <Form>
                             <Field inline>
-                                <Input onChange={this.changeUsername.bind(this)} icon="users" label="Username" type="text" fluid/>
+                                <Input onChange={this.changeInput.bind(this, "username")} icon="users" label="Username" type="text" fluid/>
                             </Field>
                             <Field inline>
-                                <Input onChange={this.changePassowrd.bind(this)} icon="asterisk" label="Password" type="password" fluid/>
+                                <Input onChange={this.changeInput.bind(this, "password")} icon="asterisk" label="Password" type="password" fluid/>
                             </Field>
-                            <Button onClick={this.login.bind(this)} animated={"fade"}  color={"teal"} fluid>
-                                <div class="visible content">Loign</div>
-                                <div class="hidden content">
-                                <i class="right arrow icon"></i>
-                                </div>
+                            <Button onClick={this.login.bind(this)} color={"teal"} fluid>
+                                Loign
                             </Button>
                         </Form> 
+                    </Column>
+                </Row>
+                <Row>
+                    <Column width="5"  aligned="right">
+                        <Link to="registration" >Not a user yet? Registrate here!</Link>
                     </Column>
                 </Row>
             </Grid>
