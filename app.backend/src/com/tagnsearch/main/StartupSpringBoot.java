@@ -65,7 +65,9 @@ public class StartupSpringBoot extends WebMvcConfigurerAdapter {
                     protected Resource getResource(String resourcePath,
                                                    Resource location) throws IOException {
 
-                        if ( resourcePath.endsWith(".js") ) {
+                        if ( resourcePath.endsWith(".js")
+                                || resourcePath.endsWith(".png")
+                                || resourcePath.endsWith(".css") ) {
                             final URL url = location.getURL();
                             return new ClassPathResource("/resources/" + resourcePath, ClassUtils.getDefaultClassLoader());
                         }
