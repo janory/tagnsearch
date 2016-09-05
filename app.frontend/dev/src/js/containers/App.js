@@ -6,6 +6,7 @@ import { Container } from "semantic-react";
 import { connect } from "react-redux"
 import { clearError } from "../actions/errorActions"
 import { logoutUser } from "../actions/userActions"
+import stylesIgnored from "../../global.css";
 
 @connect((state) => {
     return {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Header } from "semantic-react";
 
 
 export default class Welcome extends Component {
@@ -15,7 +16,7 @@ export default class Welcome extends Component {
     render() {
         return (
             <div>
-                ASDF
+                <Header>Hi</Header>
                 <div>{this.state.username}</div>
                 <div>{this.state.password}</div>
             </div>

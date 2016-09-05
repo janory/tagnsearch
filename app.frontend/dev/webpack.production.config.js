@@ -5,6 +5,14 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 
+loaders.push({
+	test: /[\/\\]src[\/\\].*\.css/,
+	loaders: [
+		'style?sourceMap',
+		'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+	]
+});
+
 module.exports = {
 	entry: [
 		'./src/js/client.js'
