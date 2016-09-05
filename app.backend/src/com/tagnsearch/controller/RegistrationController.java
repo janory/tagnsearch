@@ -35,7 +35,7 @@ public class RegistrationController {
         newUser.setFirstName(userDTO.firstName);
         newUser.setUsername(userDTO.username);
         newUser.setPassword(userDTO.password);
-        newUser.setRole(userDTO.role);
+        newUser.setRole(User.RolesEnum.USER.name());
         return newUser;
     }
 
@@ -50,8 +50,6 @@ public class RegistrationController {
         private String username;
         @NotNull
         private String password;
-        @NotNull
-        private String role;
 
         public Long getId() {
             return id;
@@ -91,14 +89,6 @@ public class RegistrationController {
 
         public void setPassword(final String password) {
             this.password = password;
-        }
-
-        public String getRole() {
-            return role;
-        }
-
-        public void setRole(final String role) {
-            this.role = role;
         }
     }
 }
