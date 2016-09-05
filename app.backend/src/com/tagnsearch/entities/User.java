@@ -10,7 +10,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Document(indexName = "tagnsearch", type = "users", indexStoreType = "memory", shards = 1, replicas = 0, refreshInterval = "-1")
 public class User {
 
-    private enum RolesEnum {ADMIN, USER};
+    public enum RolesEnum {ADMIN, USER}
 
     @Id
     private Long id;
