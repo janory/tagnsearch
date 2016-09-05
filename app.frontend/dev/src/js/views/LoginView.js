@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Column, Form, Field, Input, Button, Grid, Divider, Text } from "semantic-react";
+import { Row, Column, Form, Field, Input, Button, Grid, Divider, Text, Label } from "semantic-react";
 import { loginUser } from "../actions/userActions"
 import { connect } from "react-redux"
 import { Link } from "react-router"
@@ -47,10 +47,15 @@ export default class Login extends Component {
                     <Column width="5" style={loginBoxStyle}>
                         <Form>
                             <Field inline>
-                                <Input onChange={this.changeInput.bind(this, "username")} icon="users" label="Username" type="text" fluid/>
+                                <Input onChange={this.changeInput.bind(this, "username")}
+                                    icon="users" label="Username" type="text" fluid
+                                    labelComponent={(props) => <Label style={{width: "90px"}} {...props}/>} />
+
                             </Field>
                             <Field inline>
-                                <Input onChange={this.changeInput.bind(this, "password")} icon="asterisk" label="Password" type="password" fluid/>
+                                <Input onChange={this.changeInput.bind(this, "password")}
+                                icon="asterisk" label="Password" type="password" fluid
+                                labelComponent={(props) => <Label style={{width: "90px"}} {...props}/>} />
                             </Field>
                             <Button onClick={this.login.bind(this)} color={"teal"} fluid>
                                 Loign
