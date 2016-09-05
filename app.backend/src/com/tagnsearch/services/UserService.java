@@ -29,7 +29,6 @@ public class UserService {
         if ( !checkIfUsernameAlreadyExist(user) ) {
             throw new IllegalArgumentException("Username must be unique");
         }
-        user.setPassword(AuthUtils.encryptPassword(user.getPassword()));
         user.setId(sequenceService.getNextSequence(User.class));
         return userRepository.save(user);
     }
