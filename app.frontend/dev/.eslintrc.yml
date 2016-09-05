@@ -84,5 +84,5 @@
     no-undef-init: 2
     no-undef: 2
     no-undefined: 2
-    no-unused-vars: 2
+    no-unused-vars: [2, { "varsIgnorePattern": "[iI]gnored" }]
     no-use-before-define: 2
