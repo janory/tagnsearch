@@ -18,7 +18,6 @@ export default class Login extends Component {
     }
 
     changeInput(fieldName, event) {
-        console.log(fieldName);
         this.setState({
             [fieldName]: event.target.value
         });
