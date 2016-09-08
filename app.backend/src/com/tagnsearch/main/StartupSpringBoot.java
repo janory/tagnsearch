@@ -67,7 +67,8 @@ public class StartupSpringBoot extends WebMvcConfigurerAdapter {
 
                         if ( resourcePath.endsWith(".js")
                                 || resourcePath.endsWith(".png")
-                                || resourcePath.endsWith(".css") ) {
+                                || resourcePath.endsWith(".css")
+                                || resourcePath.endsWith(".ico")) {
                             final URL url = location.getURL();
                             return new ClassPathResource("/resources/" + resourcePath, ClassUtils.getDefaultClassLoader());
                         }
