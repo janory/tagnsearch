@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Row, Column, Form, Field, Input, Button, Grid, Divider, Text, Label } from "semantic-react";
+import { Row, Column, Form, Field, Input, Button, Grid, Divider, Text, Label, Header } from "semantic-react"
 import { loginUser } from "../actions/userActions"
 import { connect } from "react-redux"
 import { Link } from "react-router"
+import RotatingLogo from "../components/RotatingLogo"
 
 @connect()
 export default class Login extends Component {
@@ -32,7 +33,7 @@ export default class Login extends Component {
 
     render() {
         const containerStyle = {
-            marginTop: "250px"
+            marginTop: "60px"
         };
         const loginBoxStyle = {
             backgroundColor: "white",
@@ -41,9 +42,20 @@ export default class Login extends Component {
             boxShadow: "0px 0px 6px black"
         };
         return (
-            <Grid centered style={containerStyle}>
-                <Row>
-                    <Column width="5" style={loginBoxStyle}>
+            <Grid>
+                <Row centered  style={containerStyle}>
+                    <Column width="6" style={loginBoxStyle}>
+                        <Grid>
+                            <Row centered>
+                                <Column width="5">
+                                </Column>
+                                <Column width="6">
+                                    <RotatingLogo />
+                                </Column>
+                                <Column width="5" />
+                            </Row>
+                        </Grid>
+                        <Divider aligned="horizontal"><Header>Login</Header></Divider>
                         <Form>
                             <Field inline>
                                 <Input onChange={this.changeInput.bind(this, "username")}
@@ -56,7 +68,7 @@ export default class Login extends Component {
                                 icon="asterisk" label="Password" type="password" fluid
                                 labelComponent={(props) => <Label style={{width: "90px"}} {...props}/>} />
                             </Field>
-                            <Button onClick={this.login.bind(this)} color={"teal"} fluid>
+                            <Button onClick={this.login.bind(this)} emphasis="primary" fluid>
                                 Loign
                             </Button>
                         </Form>
