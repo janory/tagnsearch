@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Error from "../components/Error";
+import Logo from "../components/Logo";
 import { Container } from "semantic-react";
 import { connect } from "react-redux"
 import { clearError } from "../actions/errorActions"
@@ -28,6 +29,7 @@ export default class App extends Component {
         return (
             <div>
                 { this.props.isAuthenticated ? <Header logoutUser={this.logoutUser.bind(this)} /> : "" }
+                <Logo />
                 <Container>{this.props.children}</Container>
                 <Footer/>
                 <Error clearError={this.clearError.bind(this)} error={this.props.error} />
