@@ -8,7 +8,7 @@ export default (
     <Route path="/" component={App}>
         <IndexRedirect to="/login" />
         <Route path="/login" component={LoginView}></Route>
-        <Route path="/registration" component={RegistrationView}></Route>
+        {/* <Route path="/registration" component={RegistrationView}></Route> */ }
         <Route path="/welcome" component={requireAuthentication(WelcomeView)} />
         <Route path="*" component={NotFoundView} />
     </Route>
