@@ -5,5 +5,5 @@ package com.tagnsearch.repositories.lockable;
  */
 public interface LockingRepository<T, ID> {
     T lockById(ID id);
-    public void unlockById(String id);
+    void unlockById(String id);
 }
