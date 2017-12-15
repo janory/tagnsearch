@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by JS on 8/21/16.
@@ -18,7 +19,7 @@ public final class AuthUtils {
 
     private static final String ENCRYPTION_TYPE_MD5 = "MD5";
     private static final String SECRETKEY = new BigInteger(130, new SecureRandom()).toString(32);
-    private static final Map<String, String> USERTOKENS = new HashMap<>();
+    private static final Map<String, String> USERTOKENS = new ConcurrentHashMap<>();
 
 
     public static String encryptPassword(final String password) {
